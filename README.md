@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Truyen
 
-## Getting Started
+Open-source, Google Sheets-powered platform for publishing and reading novels or translations. No backend, no database, no infrastructure beyond a static Next.js deployment.
 
-First, run the development server:
+## 10-minute setup
+
+1. **Fork the repo**
+2. **Create a Google Sheet** with two tabs:
+   - `novels` with headers: `slug | title | author | cover | summary | tags | status`
+   - `chapters` with headers: `novel_slug | chapter_number | title | content | created_at`
+3. **Make the sheet public** (Share → Anyone with the link can view).
+4. **Create a Google OAuth client**
+   - Google Cloud Console → APIs & Services → Credentials
+   - Create OAuth client (Web) and add your site domain + `http://localhost:3000` as authorized origins
+   - Add `http://localhost:3000/admin` as redirect URI
+   - Add your production domain `/admin` as redirect URI too
+5. **Add env vars** (copy `.env.example` → `.env.local`)
+   - `NEXT_PUBLIC_SHEETS_ID=...`
+   - `NEXT_PUBLIC_GOOGLE_CLIENT_ID=...`
+   - `GOOGLE_CLIENT_SECRET=...`
+   - `NEXT_PUBLIC_ADMIN_EMAILS=baoletrangiabao@gmail.com`
+6. **Install + run**
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open `http://localhost:3000` and head to `/admin/editor` to connect your Google account.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Admin editor flow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/admin/editor` uses Google OAuth (PKCE) and the Sheets API.
+- WYSIWYG editor is TipTap; content is saved as HTML in the Google Sheet.
+- For security, only OAuth tokens from your Google account are used (no server-side secrets for writes).
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy on Vercel (or any Next.js host). Add the same env vars from `.env.example` in your hosting provider.
