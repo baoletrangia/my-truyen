@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# AI
+/.opencode
+
 # next.js
 /.next/
 /out/
