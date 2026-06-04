@@ -142,7 +142,7 @@ export default function AdminLogin() {
       profile,
     });
     window.history.replaceState({}, "", redirectUri);
-    window.location.href = "/admin/editor";
+    window.location.href = "/admin/novels";
   }, [redirectUri]);
 
   useEffect(() => {

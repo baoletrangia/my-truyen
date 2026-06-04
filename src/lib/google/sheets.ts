@@ -76,9 +76,7 @@ export async function getNovels(revalidate?: number): Promise<Novel[]> {
     sheetName: env.novelsSheet,
     revalidate,
   });
-  console.log("rows", rows);
   const items = mapRowsToObjects(rows);
-  console.log("items", items);
   return items
     .filter((item) => item.slug)
     .map((item) => {
