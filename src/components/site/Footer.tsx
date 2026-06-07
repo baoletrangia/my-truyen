@@ -1,4 +1,13 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 export default function Footer() {
+  const pathname = usePathname();
+  const isReader = pathname.startsWith("/novel/") && pathname.includes("/chapter/");
+
+  if (isReader) return null;
+
   return (
     <footer className="shell" style={{ padding: "2rem 0 3rem" }}>
       <div

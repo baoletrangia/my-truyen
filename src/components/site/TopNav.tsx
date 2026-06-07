@@ -1,7 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { env } from "@/lib/env";
 
 export default function TopNav() {
+  const pathname = usePathname();
+  const isReader = pathname.startsWith("/novel/") && pathname.includes("/chapter/");
+
+  if (isReader) return null;
+
   return (
     <header className="shell fade-in" style={{ padding: "2rem 0 1.5rem" }}>
       <div
@@ -20,7 +28,6 @@ export default function TopNav() {
         </Link>
         <nav style={{ display: "flex", gap: "1rem", fontWeight: 500 }}>
           <Link href="/novels">Library</Link>
-          <Link href="/settings">Reader</Link>
           <Link href="/admin">Admin</Link>
         </nav>
       </div>

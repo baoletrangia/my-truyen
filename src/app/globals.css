@@ -244,3 +244,130 @@ textarea:focus {
     max-width: 100%;
   }
 }
+
+/* ── Reader Navbar ── */
+.reader-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.3s ease;
+}
+
+.reader-navbar.hidden {
+  transform: translateY(-100%);
+}
+
+.reader-navbar-ghost {
+  height: 56px;
+}
+
+/* Chapter selector trigger */
+.chapter-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--surface-ink);
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chapter-trigger:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.chapter-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px var(--shadow);
+  z-index: 60;
+}
+
+.chapter-dropdown a {
+  display: block;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  color: var(--surface-ink);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.chapter-dropdown a:last-child {
+  border-bottom: none;
+}
+
+.chapter-dropdown a:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.chapter-dropdown a.active {
+  background: var(--accent-glow);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+/* ── Reader Sidebar ── */
+.reader-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 80;
+  animation: fadeIn 0.2s ease;
+}
+
+.reader-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 340px;
+  max-width: 100vw;
+  z-index: 90;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+
+.reader-sidebar.open {
+  transform: translateX(0);
+}
+
+/* ── Reader Shell ── */
+.reader-shell {
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--surface-ink);
+}
+
+.reader-shell main {
+  gap: 0;
+}
