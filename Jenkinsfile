@@ -4,6 +4,13 @@ pipeline {
         nodejs 'node-lts-24'
     }
     stages {
+        stage('Install') {
+            steps {
+                echo 'Installing...'
+                sh 'node --version && npm --version'
+                sh 'npm ci'
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
@@ -14,11 +21,6 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh 'npm run lint'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
             }
         }
     }
