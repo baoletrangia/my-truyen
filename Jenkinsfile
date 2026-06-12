@@ -12,6 +12,11 @@ pipeline {
             }
         }
         stage('Build') {
+            environment {
+                NEXT_PUBLIC_SHEETS_ID = credentials('google-sheet-id')
+                NEXT_PUBLIC_GOOGLE_CLIENT_ID = credentials('google-client-id')
+                GOOGLE_API_KEY = credentials('google-sheet-api-key')
+            }
             steps {
                 echo 'Building..'
                 sh 'npm run build'
