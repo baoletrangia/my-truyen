@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'node-lts-24'
+    }
     stages {
         stage('Build') {
             steps {
